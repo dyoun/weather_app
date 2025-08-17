@@ -55,6 +55,8 @@ module Address
       raise Weather::Errors::WeatherError, "Address not found: #{address}" if data.empty?
 
       result = data.first
+      raise Weather::Errors::WeatherError, "Zipcode not found for Address: #{address}" unless result.dig(:address, :postcode)
+
       Addresses.new(
         address: "#{result[:address][:house_number]} #{result[:address][:road]}",
         city: result[:address][:city],
