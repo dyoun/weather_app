@@ -1,0 +1,100 @@
+<div class="weather-form-container">
+  <h1>Weather Lookup</h1>
+
+  <%= form_with url: weather_path, method: :get, local: true, class: "weather-form" do |form| %>
+    <div class="form-group">
+      <%= form.label :address, "Enter Address or Location with a Zip Code:" %>
+      <%= form.text_field :address, placeholder: "e.g., 400 Broad Street, Seattle, WA, Space Needle", required: true, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit "Get Weather", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
+  <% if @error %>
+    <div class="error-results">
+      <h2>Error</h2>
+      <p><%= @error %></p>
+    </div>
+  <% elsif params[:address].present? && @weather_data %>
+    <div class="weather-results">
+      <h2>Weather for <%= params[:address] %></h2>
+      <div class="weather-info">
+        <p><strong>Description:</strong> <%= @weather_data[:description] %></p>
+        <p><strong>Temperature:</strong> <%= @weather_data[:temperature] %>°F</p>
+        <p><strong>Condition:</strong> <%= @weather_data[:condition] %></p>
+        <p><strong>Humidity:</strong> <%= @weather_data[:humidity] %>%</p>
+        <p><%= @weather_data[:timestamp] %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<style>
+    body {
+        background-image: url('<%= asset_path("earth.jpeg") %>');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+    }
+
+    .weather-form-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+    }
+
+    .weather-form {
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .weather-results {
+        background: #e9f7ef;
+        padding: 20px;
+        border-radius: 8px;
+        border-left: 4px solid #28a745;
+    }
+
+    .weather-info p {
+        margin: 5px 0;
+    }
+
+    .error-results {
+        background: #f8d7da;
+        padding: 20px;
+        border-radius: 8px;
+        border-left: 4px solid #dc3545;
+        color: #721c24;
+    }
+</style>
