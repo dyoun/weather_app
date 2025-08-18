@@ -11,8 +11,13 @@ module Weather
 
     def get_weather_by_zip(zip)
       validate(zip)
-      response = fetch_weather_data(zip)
-      parse_weather_response(response, zip)
+
+      # cache by zip for 30 minutes
+      cache_key = "weather_data_#{zip}"
+      Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
+        response = fetch_weather_data(zip)
+        parse_weather_response(response, zip)
+      end
     rescue Faraday::Error => e
       raise Weather::Errors::ServiceUnavailableError, "Open Weather service unavailable: #{e.message}"
     rescue JSON::ParserError => e
