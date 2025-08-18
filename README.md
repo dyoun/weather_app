@@ -1,24 +1,57 @@
-# README
+# Rails Weather App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+rails application that retrieves weather information based on an address using SOLID principles and enterprise design patterns.
 
-Things you may want to cover:
+addresses/location are normalized using [OpenStreetMaps](https://nominatim.openstreetmap.org/ui/search.html?q=space+needle) and include a zip code.
 
-* Ruby version
+weather information is retrieved from [OpenWeather API](https://www.weatherapi.com/api-explorer.aspx#forecast)
 
-* System dependencies
+TODO: github pipeline, shipping to prod (docker), flesh out readme.md
 
-* Configuration
+## Quickstart
+```shell
+bundle exec install
+OPEN_WEATHER_API_KEY= ./bin/rails server
 
-* Database creation
+# alternatively
+docker build
 
-* Database initialization
+```
 
-* How to run the test suite
+## Architecture
 
-* Services (job queues, cache servers, search engines, etc.)
+### [SOLID Principles](https://en.wikipedia.org/wiki/SOLID)
 
-* Deployment instructions
+* single responsibility principle: each class a single responsibility
+  * `WeatherService` - weather API
+  * `GeocodingService` - address normalization
+  * `WeatherRepository` - coordinates data retrieval
+  * `WeatherController` - handles HTTP requests
 
-* ...
+* open/closed principle: open for extension, closed for modification
+  * open for extension by implementing interfaces, private methods to prevent modifications
+    * `WeatherServiceInterface` and `GeocodingServiceInterface` define interfaces
+  * interface design allows for easy service swapping
+
+* liskov substitution principle: implementations are substitutable by their interfaces
+  * weather and address services can be substituted in `WeatherRepository`
+  * any weather/address service implementing `WeatherServiceInterface` or `GeocodingServiceInterface` can be used
+
+* interface segregation principle: focused, specific interfaces
+  * separate interfaces for weather/address services
+  * no dependencies on unused methods
+
+* dependency inversion principle: high level modules don't depend on low level modules
+  * repository class `WeatherRepository` abstracts data access
+  * services are injected as dependencies
+
+
+### Design Patterns
+* repository pattern
+  * `WeatherRepository` isolates data access and separate concerns by keeping application logic separate
+* command pattern
+  * `GetWeatherByAddressCommand` decouples sender of request from receiver providing more flexibility
+* strategy pattern
+  * `WeatherRepository` separate concerns as services and make them interchangeable allowing flexibility
+* factory pattern
+  * `GetWeatherByAddressCommand` client doesn't create objects directly
