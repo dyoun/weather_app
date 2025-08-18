@@ -7,7 +7,6 @@ class WeatherData
   attribute :location_name, :string
   attribute :location_region, :string
   attribute :location_country, :string
-  attribute :zip, :string
   attribute :icon_url, :string
   attribute :temperature_f, :float
   attribute :temperature_c, :float
