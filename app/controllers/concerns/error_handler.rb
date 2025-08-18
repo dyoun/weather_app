@@ -3,9 +3,6 @@
 # usage:
 #   include errorhandler in controllers to automatically rescue and handle errors
 module ErrorHandler
-  # ...
-end
-module ErrorHandler
   extend ActiveSupport::Concern
 
   included do
