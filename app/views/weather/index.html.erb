@@ -21,9 +21,9 @@
     <div class="weather-results">
       <h2>Weather for <%= params[:address] %></h2>
       <div class="weather-info">
+        <img src="<%= @weather_data[:icon_url] %>" class="weather-icon"/>
         <p><strong>Description:</strong> <%= @weather_data[:description] %></p>
         <p><strong>Temperature:</strong> <%= @weather_data[:temperature] %>°F</p>
-        <p><strong>Condition:</strong> <%= @weather_data[:condition] %></p>
         <p><strong>Humidity:</strong> <%= @weather_data[:humidity] %>%</p>
         <p><%= @weather_data[:timestamp] %></p>
       </div>
@@ -88,6 +88,12 @@
 
     .weather-info p {
         margin: 5px 0;
+    }
+
+    .weather-icon {
+        display: block;
+        margin: 0 auto;
+        max-width: 120px;
     }
 
     .error-results {
