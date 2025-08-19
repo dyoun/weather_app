@@ -89,7 +89,7 @@ RSpec.describe Weather::OpenWeatherMapService do
 
       it 'raises ArgumentError when zip code is invalid' do
         allow(addresses_double).to receive(:valid?).and_return(true)
-        allow(addresses_double).to receive(:errors).and_return({ zip: ["is invalid"] })
+        allow(addresses_double).to receive(:errors).and_return({ zip: [ "is invalid" ] })
         expect { service.get_weather_by_zip("invalid") }.to raise_error(ArgumentError, "Zip code is invalid.")
       end
     end
@@ -165,7 +165,7 @@ RSpec.describe Weather::OpenWeatherMapService do
 
       it 'returns false for invalid zip codes' do
         allow(Addresses).to receive(:new).with(zip: zip_code).and_return(
-          instance_double(Addresses, valid?: true, errors: { zip: ["is invalid"] })
+          instance_double(Addresses, valid?: true, errors: { zip: [ "is invalid" ] })
         )
 
         result = service.send(:valid_zip?, zip_code)
