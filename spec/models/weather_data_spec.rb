@@ -12,7 +12,8 @@ RSpec.describe WeatherData, type: :model do
       description: "Partly cloudy",
       humidity: 65.0,
       wind_speed: 5.2,
-      icon_url: "https://cdn.weatherapi.com/weather/64x64/day/116.png"
+      icon_url: "https://cdn.weatherapi.com/weather/64x64/day/116.png",
+      cached: false
     }
   end
 
@@ -34,6 +35,7 @@ RSpec.describe WeatherData, type: :model do
       expect(result[:wind_speed]).to eq(5.2)
       expect(result[:icon_url]).to eq("https://cdn.weatherapi.com/weather/64x64/day/116.png")
       expect(result[:timestamp]).to eq(weather_data.timestamp)
+      expect(weather_data.cached).to eq(false)
     end
   end
 end
