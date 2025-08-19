@@ -10,15 +10,20 @@ TODO: github pipeline, shipping to prod (docker), flesh out readme.md
 
 ## Quickstart
 ```shell
+# pre-requisites: ruby 3.4.5
 bundle exec install
 OPEN_WEATHER_API_KEY= ./bin/rails server
+# http://127.0.0.1:3000/
 
 # alternatively
-docker build
-
+docker build -t rails-weather-app .
+docker run -e OPEN_WEATHER_API_KEY= -e RAILS_MASTER_KEY=$(cat config/master.key) -p 3000:3000 rails-weather-app
+# http://127.0.0.1:3000/
 ```
 
 ## Architecture
+
+weather data is cached for 30 minutes by zipcode
 
 ### [SOLID Principles](https://en.wikipedia.org/wiki/SOLID)
 
