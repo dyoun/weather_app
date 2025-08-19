@@ -118,7 +118,6 @@ RSpec.describe Weather::OpenWeatherMapService do
       it 'raises ApiError when API request fails' do
         failed_response = instance_double(Faraday::Response, success?: false, body: valid_response_body)
         allow(Faraday).to receive(:get).and_return(failed_response)
-
         expect { service.get_weather_by_zip(zip_code) }.to raise_error(
                                                              Weather::Errors::ApiError,
                                                              "API request failed"
