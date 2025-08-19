@@ -10,54 +10,23 @@ jobs:
     name: Run Tests
     runs-on: ubuntu-latest
 
-    services:
-      redis:
-        image: redis:7-alpine
-        ports:
-          - 6379:6379
-        options: --health-cmd redis-cli ping --health-interval 10s --health-timeout 5s --health-retries 5
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.4.5'
+          ruby-version: 2.7
           bundler-cache: true
 
-      - name: Install system dependencies
+      - name: Install dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y sqlite3 libsqlite3-dev
+          bundle install
 
-      - name: Set up test database
+      - name: Run RSpec
         run: |
-          cp config/database.yml config/database.yml.backup 2>/dev/null || true
-          bundle exec rails db:prepare RAILS_ENV=test
-        env:
-          RAILS_ENV: test
-
-      - name: Run RSpec tests
-        run: bundle exec rspec --format progress --format RspecJunitFormatter --out tmp/rspec.xml
-        env:
-          RAILS_ENV: test
-          REDIS_URL: redis://localhost:6379/1
-
-      - name: Upload test results
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: test-results
-          path: tmp/rspec.xml
-
-      - name: Upload coverage reports
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: coverage-report
-          path: coverage/
+          bundle exec rspec
 
   scan_ruby:
     runs-on: ubuntu-latest
@@ -105,4 +74,3 @@ jobs:
 
       - name: Lint code for consistent style
         run: bin/rubocop -f github
-
