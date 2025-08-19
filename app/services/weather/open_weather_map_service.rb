@@ -1,10 +1,10 @@
-require_relative 'interfaces/weather_service_interface'
+require_relative "interfaces/weather_service_interface"
 
 module Weather
   class OpenWeatherMapService < Interfaces::WeatherServiceInterface
-    BASE_URL = 'http://api.weatherapi.com/v1'
+    BASE_URL = "http://api.weatherapi.com/v1"
 
-    def initialize(api_key = ENV['OPEN_WEATHER_API_KEY'], http_client = Faraday)
+    def initialize(api_key = ENV["OPEN_WEATHER_API_KEY"], http_client = Faraday)
       @api_key = api_key
       @http_client = http_client
     end

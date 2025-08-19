@@ -33,7 +33,7 @@ class WeatherData
       humidity: humidity,
       wind_speed: wind_speed,
       timestamp: timestamp,
-      cached: cached,
+      cached: cached
     }
   end
 end

@@ -31,7 +31,7 @@ module ErrorHandler
   def render_error_response(message, status)
     render json: {
       error: message,
-      status: 'error',
+      status: "error",
       timestamp: Time.current.iso8601
     }, status: status
   end
