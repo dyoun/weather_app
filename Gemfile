@@ -58,6 +58,8 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "webmock"
   gem "rails-controller-testing"
+  gem "simplecov", require: false
+  gem "simplecov-cobertura", require: false
 end
 
 group :development do
