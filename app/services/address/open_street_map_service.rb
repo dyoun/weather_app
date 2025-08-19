@@ -16,7 +16,7 @@ require_relative "interfaces/address_service_interface"
 # - Raises Weather::Errors::WeatherError for lookup failures or result not found
 module Address
   class OpenStreetMapService < Interfaces::AddressServiceInterface
-    BASE_URL = 'https://nominatim.openstreetmap.org/search'
+    BASE_URL = "https://nominatim.openstreetmap.org/search"
 
     def initialize(http_client = Faraday)
       @http_client = http_client

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  root to: redirect('/weather')
+  root to: redirect("/weather")
   # weather endpoints
   get "weather", to: "weather#index"
   get "weather/api", to: "weather#show"

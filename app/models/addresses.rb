@@ -25,7 +25,7 @@ class Addresses
   attribute :state, :string
   attribute :zip, :string
 
-  validates :address, :city, :state, :zip, :presence => true
+  validates :address, :city, :state, :zip, presence: true
   validates :zip, presence: true, numericality: true, format: { with: /\A\d{5}\z/, message: "Zip code must be a 5-digit number." }
 
   def to_h
