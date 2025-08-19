@@ -24,6 +24,9 @@ docker run -e OPEN_WEATHER_API_KEY= -e RAILS_MASTER_KEY= -p 3000:3000 "ghcr.io/d
 # http://127.0.0.1:3000/
 ```
 
+## API
+`/weather/api?address=space%20needle`
+
 ## Architecture
 
 weather data is cached for 30 minutes by zipcode
