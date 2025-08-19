@@ -27,6 +27,13 @@ docker run -e OPEN_WEATHER_API_KEY= -e RAILS_MASTER_KEY= -p 3000:3000 "ghcr.io/d
 ## API
 `/weather/api?address=space%20needle`
 
+## CI Pipeline
+CI is run using GitHub Actions and includes:
+* linting with [RuboCop](https://rubocop.org/)
+* security scanning with [Brakeman](https://brakemanscanner.org/)
+* testing with [RSpec](https://rspec.info/)
+* docker image build and push to [GitHub Container Registry](https://github.com/dyoun/weather_app/pkgs/container/weather_app)
+
 ## Architecture
 
 weather data is cached for 30 minutes by zipcode
