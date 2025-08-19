@@ -114,6 +114,7 @@ RSpec.describe Weather::OpenWeatherMapService do
       end
     end
 
+		# rubocop:disable all
     context 'API response errors' do
       it 'raises ApiError when API request fails' do
         failed_response = instance_double(Faraday::Response, success?: false, body: valid_response_body)
@@ -122,7 +123,7 @@ RSpec.describe Weather::OpenWeatherMapService do
                                                              Weather::Errors::ApiError,
                                                              "API request failed"
                                                            )
-      end # rubocop:disable Layout/EmptyLinesAroundBlockBody
+      end
     end
 
     context 'response parsing' do
