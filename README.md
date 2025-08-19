@@ -32,6 +32,9 @@ CI is run using GitHub Actions and includes:
 * linting with [RuboCop](https://rubocop.org/)
 * security scanning with [Brakeman](https://brakemanscanner.org/)
 * testing with [RSpec](https://rspec.info/)
+  * [![CI](https://github.com/dyoun/weather_app/workflows/CI/badge.svg)](https://github.com/dyoun/weather_app/actions)
+  * [![codecov](https://codecov.io/gh/dyoun/weather_app/branch/main/graph/badge.svg)](https://codecov.io/gh/dyoun/weather_app)
+
 * docker image build and push to [GitHub Container Registry](https://github.com/dyoun/weather_app/pkgs/container/weather_app)
 
 ## Architecture

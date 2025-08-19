@@ -28,9 +28,35 @@ jobs:
         run: |
           bundle install
 
-      - name: Run RSpec
+      - name: Run RSpec with coverage
         run: |
           bundle exec rspec
+        env:
+          COVERAGE: true
+
+      - name: Upload Coverage Reports to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage/coverage.xml
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Generate Coverage Badge
+        uses: jaywcjlove/coverage-badges-cli@main
+        with:
+          source: coverage/coverage.json
+          output: coverage/badges.svg
+
+      - name: Upload Coverage Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: |
+            coverage/
+            !coverage/assets/          
 
   scan_ruby:
     runs-on: ubuntu-latest
