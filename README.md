@@ -34,8 +34,28 @@ CI is run using GitHub Actions and includes:
 * testing with [RSpec](https://rspec.info/)
   * [![CI](https://github.com/dyoun/weather_app/workflows/CI/badge.svg)](https://github.com/dyoun/weather_app/actions)
   * [![codecov](https://codecov.io/gh/dyoun/weather_app/branch/main/graph/badge.svg)](https://codecov.io/gh/dyoun/weather_app)
-
 * docker image build and push to [GitHub Container Registry](https://github.com/dyoun/weather_app/pkgs/container/weather_app)
+
+## Shipping to Production
+docker image is stored in Github container registry where it can be easily pulled and deployed and composed for 
+use in a production environment.
+
+## Scalability
+
+### Caching
+address and weather data is cached locally by request. a more optimal solution would be to pre-populate a shared cache
+such as redis by all zip codes to provide a fast response to all requests.
+
+### Global Optimizations
+to optimize globally, CDNs and serving app instances in geographic locations will provide a better user experience
+by sending users to closest data centers in their locale, eg, europe, asia, etc.
+
+
+## Further Optimizations
+open street maps is used to normalize address/locations, however, all locations do not return a zip code, eg,
+golden gate park.
+
+to allow better location weather support, latitude/longitude could be used as a cache key for weather data.
 
 ## Architecture
 
