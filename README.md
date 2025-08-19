@@ -10,12 +10,17 @@ weather information is retrieved from [OpenWeather API](https://www.weatherapi.c
 ```shell
 # pre-requisites: ruby 3.4.5
 bundle install
-OPEN_WEATHER_API_KEY= ./bin/rails server
+OPEN_WEATHER_API_KEY= RAILS_MASTER_KEY= ./bin/rails server
 # http://127.0.0.1:3000/
 
-# alternatively
-docker build -t rails-weather-app .
-docker run -e OPEN_WEATHER_API_KEY= -e RAILS_MASTER_KEY=$(cat config/master.key) -p 3000:3000 rails-weather-app
+# docker alternatives
+# pull latest image
+docker pull ghcr.io/dyoun/weather_app:latest
+# or build image locally
+docker build -t weather_app .
+
+# start the container 
+docker run -e OPEN_WEATHER_API_KEY= -e RAILS_MASTER_KEY= -p 3000:3000 "ghcr.io/dyoun/weather_app"
 # http://127.0.0.1:3000/
 ```
 
