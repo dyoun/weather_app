@@ -55,7 +55,7 @@ class WeatherController < ApplicationController
   end
 
   def render_missing_parameters
-    render_error_response("Please provide an 'address' parameter", :bad_request)
+    render_error_response("Please provide an 'address' parameter", :bad_request) # rubocop:disable Style/StringLiterals
   end
 
   def render_success_response(weather_data)
