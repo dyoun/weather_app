@@ -9,19 +9,19 @@ RSpec.describe Weather::OpenWeatherMapService do
   let(:valid_response_body) do
     {
       "location" => {
-        "name" => "Seattle",
-        "region" => "Washington",
+        "name"    => "Seattle",
+        "region"  => "Washington",
         "country" => "United States"
       },
-      "current" => {
-        "temp_f" => 75.0,
-        "temp_c" => 23.9,
+      "current"  => {
+        "temp_f"    => 75.0,
+        "temp_c"    => 23.9,
         "condition" => {
           "text" => "Partly cloudy",
           "icon" => "https://cdn.weatherapi.com/weather/64x64/day/116.png"
         },
-        "humidity" => 65.0,
-        "speed" => 5.2
+        "humidity"  => 65.0,
+        "speed"     => 5.2
       }
     }.to_json
   end
@@ -123,7 +123,7 @@ RSpec.describe Weather::OpenWeatherMapService do
                                                              Weather::Errors::ApiError,
                                                              "API request failed"
                                                            )
-      end
+      end # rubocop:disable Layout/EmptyLinesAroundBlockBody
     end
 
     context 'response parsing' do
