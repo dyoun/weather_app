@@ -9,7 +9,7 @@ weather information is retrieved from [OpenWeather API](https://www.weatherapi.c
 ## Quickstart
 ```shell
 # pre-requisites: ruby 3.4.5
-bundle exec install
+bundle install
 OPEN_WEATHER_API_KEY= ./bin/rails server
 # http://127.0.0.1:3000/
 
