@@ -23,7 +23,7 @@
       <div class="weather-info">
         <img src="<%= @weather_data[:icon_url] %>" class="weather-icon"/>
         <p><strong>Description:</strong> <%= @weather_data[:description] %></p>
-        <p><strong>Temperature:</strong> <%= @weather_data[:temperature] %>°F</p>
+        <p><strong>Temperature:</strong> <%= @weather_data[:temperature_f] %>°F</p>
         <p><strong>Humidity:</strong> <%= @weather_data[:humidity] %>%</p>
         <p><%= @weather_data[:timestamp] %></p>
       </div>
