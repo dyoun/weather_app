@@ -27,6 +27,11 @@
         <p><strong>Humidity:</strong> <%= @weather_data[:humidity] %>%</p>
         <p><%= @weather_data[:timestamp] %></p>
       </div>
+      <% if @weather_data[:cached] %>
+        <div class="cache-indicator">
+          <p><em>cached (last updated: <%= time_ago_in_words(@weather_data[:timestamp]) %> ago)</em></p>
+        </div>
+      <% end %>
     </div>
   <% end %>
 </div>
@@ -84,6 +89,11 @@
         padding: 20px;
         border-radius: 8px;
         border-left: 4px solid #28a745;
+    }
+
+    .cache-indicator p {
+        margin: 0;
+        color: #856404;
     }
 
     .weather-info p {

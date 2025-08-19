@@ -14,6 +14,7 @@ class WeatherData
   attribute :humidity, :float
   attribute :wind_speed, :float
   attribute :timestamp, :datetime, default: -> { Time.current }
+  attribute :cached, :boolean, default: false
 
   validates :zip, :temperature, :description, presence: true
   validates :temperature, numericality: true
@@ -31,7 +32,8 @@ class WeatherData
       description: description,
       humidity: humidity,
       wind_speed: wind_speed,
-      timestamp: timestamp
+      timestamp: timestamp,
+      cached: cached,
     }
   end
 end

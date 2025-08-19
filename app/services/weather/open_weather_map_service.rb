@@ -14,9 +14,18 @@ module Weather
 
       # cache by zip for 30 minutes
       cache_key = "weather_data_#{zip}"
-      Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
-        response = fetch_weather_data(zip)
-        parse_weather_response(response, zip)
+      cached_data = Rails.cache.read(cache_key)
+
+      if cached_data
+        cached_data.cached = true
+        cached_data
+      else
+        weather_data = Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
+          response = fetch_weather_data(zip)
+          parse_weather_response(response, zip)
+        end
+        weather_data.cached = false
+        weather_data
       end
     rescue Faraday::Error => e
       raise Weather::Errors::ServiceUnavailableError, "Open Weather service unavailable: #{e.message}"
